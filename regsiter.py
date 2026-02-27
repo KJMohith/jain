@@ -86,10 +86,13 @@ def register_student(student_id, name, student_class, section, parent_phone):
         "parent_phone": parent_phone
     }])
 
-    if os.path.exists(STUDENT_FILE):
-        student_data.to_csv(STUDENT_FILE, mode='a', header=False, index=False)
-    else:
-        student_data.to_csv(STUDENT_FILE, index=False)
+    needs_header = (not os.path.exists(STUDENT_FILE)) or os.path.getsize(STUDENT_FILE) == 0
+    student_data.to_csv(
+        STUDENT_FILE,
+        mode='a' if not needs_header else 'w',
+        header=needs_header,
+        index=False,
+    )
 
     print("Student Registered Successfully!\n")
 
