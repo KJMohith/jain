@@ -1,0 +1,8 @@
+# Python cache artifacts
+__pycache__/
+*.py[cod]
+
+# Runtime-generated attendance database files
+database/attendance.csv
+database/notification_log.csv
+database/embeddings.pkl
