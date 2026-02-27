@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, simpledialog
 import threading
 import recognise
 import regsiter
@@ -89,11 +89,22 @@ def open_register_window():
 
 
 def start_recognition():
+    duration_minutes = simpledialog.askinteger(
+        "Recognition Duration",
+        "Run recognition for how many minutes?",
+        minvalue=1,
+        initialvalue=5,
+        parent=root,
+    )
+
+    if duration_minutes is None:
+        return
+
     loading = show_loading("Starting Recognition...")
 
     def run_recognition():
         root.after(0, lambda: root.attributes("-fullscreen", False))
-        recognise.recognize()
+        recognise.recognize(session_duration_seconds=duration_minutes * 60)
         root.after(0, lambda: root.attributes("-fullscreen", True))
         root.after(0, loading.destroy)
 

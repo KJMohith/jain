@@ -5,6 +5,9 @@ import pandas as pd
 from deepface import DeepFace
 from datetime import datetime
 import os
+import time
+
+import automatic
 
 EMBEDDING_FILE = "database/embeddings.pkl"
 ATTENDANCE_FILE = "database/attendance.csv"
@@ -56,7 +59,7 @@ def mark_attendance(student_id, name, student_class, section):
     print(f"✅ Attendance marked for {name}")
 
 
-def recognize():
+def recognize(session_duration_seconds=None):
 
     if not os.path.exists(EMBEDDING_FILE):
         print("❌ No registered students found.")
@@ -66,6 +69,8 @@ def recognize():
         db = pickle.load(f)
 
     cap = cv2.VideoCapture(0)
+
+    start_time = time.time()
 
     while True:
         ret, frame = cap.read()
@@ -130,11 +135,22 @@ def recognize():
 
         cv2.imshow("Face Recognition", frame)
 
+        if (
+            session_duration_seconds is not None
+            and time.time() - start_time >= session_duration_seconds
+        ):
+            print("⏱️ Recognition session completed.")
+            break
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()
     cv2.destroyAllWindows()
+
+    # Trigger one absentee check immediately after the session window ends.
+    client = automatic.build_client()
+    automatic.check_absentees(client)
 
 
 if __name__ == "__main__":
