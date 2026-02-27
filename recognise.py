@@ -19,7 +19,6 @@ def cosine_similarity(vec1, vec2):
     vec2 = np.array(vec2)
     return np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
 
-
 def mark_attendance(student_id, name, student_class, section):
 
     now = datetime.now()
