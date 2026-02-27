@@ -3,6 +3,9 @@ from tkinter import ttk, messagebox
 import threading
 import recognise
 import regsiter
+import os
+import cv2
+import signal
 
 
 def show_loading(text="Loading..."):
@@ -92,8 +95,14 @@ def start_recognition():
     root.after(300, lambda: threading.Thread(target=run_recognition).start())
 
 
+
 def exit_app():
-    root.destroy()
+    try:
+        root.destroy()
+    except:
+        pass
+
+    os.kill(os.getpid(), signal.SIGTERM)
     
 
 root = tk.Tk()
