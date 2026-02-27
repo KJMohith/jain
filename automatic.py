@@ -27,9 +27,9 @@ LOG_FILE = os.path.join(DATABASE_DIR, "notification_log.csv")
 
 CHECK_INTERVAL_SECONDS = int(os.getenv("CHECK_INTERVAL_SECONDS", "3600"))
 
-ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID", "")
-AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "")
-TWILIO_NUMBER = os.getenv("TWILIO_NUMBER", "")
+ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID", " AC151c6b601ff1edf3a341ca479dcc8004")
+AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "5003ac83ee15dd69f0692ea8fb3ad3f6")
+TWILIO_NUMBER = os.getenv("TWILIO_NUMBER", "+18568050268")
 
 os.makedirs(DATABASE_DIR, exist_ok=True)
 
