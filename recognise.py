@@ -9,7 +9,7 @@ import os
 EMBEDDING_FILE = "database/embeddings.pkl"
 ATTENDANCE_FILE = "database/attendance.csv"
 
-THRESHOLD = 0.70
+THRESHOLD = 0.78
 
 marked_today = set()
 
