@@ -5,7 +5,6 @@ import recognise
 import regsiter
 
 
-# ---------------- LOADING WINDOW ----------------
 def show_loading(text="Loading..."):
     loading = tk.Toplevel(root)
     loading.geometry("300x120")
@@ -26,7 +25,6 @@ def show_loading(text="Loading..."):
     return loading
 
 
-# ---------------- REGISTER ----------------
 def open_register_window():
     reg_win = tk.Toplevel(root)
     reg_win.title("Register Student")
@@ -62,14 +60,12 @@ def open_register_window():
         loading = show_loading("Opening Camera...")
 
         def run_register():
-            # Exit fullscreen so camera appears properly
             root.after(0, lambda: root.attributes("-fullscreen", False))
 
             regsiter.register_student(
                 sid, name, student_class, section
             )
 
-            # Restore fullscreen after camera closes
             root.after(0, lambda: root.attributes("-fullscreen", True))
             root.after(0, loading.destroy)
 
@@ -79,31 +75,27 @@ def open_register_window():
               command=submit).pack(pady=20)
 
 
-# ---------------- RECOGNITION ----------------
+
 def start_recognition():
 
     loading = show_loading("Starting Recognition...")
 
     def run_recognition():
-        # Exit fullscreen so camera shows on top
+  
         root.after(0, lambda: root.attributes("-fullscreen", False))
 
         recognise.recognize()
 
-        # Restore fullscreen after camera closes
         root.after(0, lambda: root.attributes("-fullscreen", True))
         root.after(0, loading.destroy)
 
     root.after(300, lambda: threading.Thread(target=run_recognition).start())
 
 
-# ---------------- EXIT ----------------
 def exit_app():
     root.destroy()
     
 
-
-# ---------------- MAIN GUI ----------------
 root = tk.Tk()
 root.title("Smart Attendance System")
 root.attributes("-fullscreen", True)
