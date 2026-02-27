@@ -69,7 +69,6 @@ def send_sms(client: Client | None, phone: str, student_name: str, student_class
         f"Student: {student_name}\n"
         f"Class: {student_class}-{section}\n"
         "Status: ABSENT\n\n"
-        "If this is incorrect, please contact school."
     )
 
     try:
