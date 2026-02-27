@@ -44,10 +44,13 @@ def mark_attendance(student_id, name, student_class, section):
         "time": time_str
     }])
 
-    if os.path.exists(ATTENDANCE_FILE):
-        attendance_data.to_csv(ATTENDANCE_FILE, mode='a', header=False, index=False)
-    else:
-        attendance_data.to_csv(ATTENDANCE_FILE, index=False)
+    needs_header = (not os.path.exists(ATTENDANCE_FILE)) or os.path.getsize(ATTENDANCE_FILE) == 0
+    attendance_data.to_csv(
+        ATTENDANCE_FILE,
+        mode='a' if not needs_header else 'w',
+        header=needs_header,
+        index=False,
+    )
 
     marked_today.add((student_id, date_str))
     print(f"✅ Attendance marked for {name}")
