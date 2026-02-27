@@ -9,7 +9,7 @@ import os
 EMBEDDING_FILE = "database/embeddings.pkl"
 ATTENDANCE_FILE = "database/attendance.csv"
 
-THRESHOLD = 0.75
+THRESHOLD = 0.70
 
 marked_today = set()
 
@@ -64,8 +64,6 @@ def recognize():
         db = pickle.load(f)
 
     cap = cv2.VideoCapture(0)
-
-    print("Press 'q' to quit")
 
     while True:
         ret, frame = cap.read()

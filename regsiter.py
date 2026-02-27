@@ -3,6 +3,9 @@ import os
 import pickle
 import pandas as pd
 from deepface import DeepFace
+import sys
+
+
 
 os.makedirs("images", exist_ok=True)
 os.makedirs("database", exist_ok=True)
@@ -92,9 +95,11 @@ def register_student(student_id, name, student_class, section):
 
 
 if __name__ == "__main__":
-    sid = input("Enter Student ID: ")
-    name = input("Enter Name: ")
-    student_class = input("Enter Class: ")
-    section = input("Enter Section: ")
-
-    register_student(sid, name, student_class, section)
+    if len(sys.argv) == 5:
+        sid = sys.argv[1]
+        name = sys.argv[2]
+        student_class = sys.argv[3]
+        section = sys.argv[4]
+        register_student(sid, name, student_class, section)
+    else:
+        print("Invalid arguments")
