@@ -29,7 +29,7 @@ def cosine_similarity(vec1, vec2):
 
 
 def slot_start_for(now: datetime) -> datetime:
-    return now.replace(minute=0, second=0, microsecond=0)
+    return now.replace(second=0, microsecond=0)
 
 
 def load_students() -> dict[str, dict]:
