@@ -4,9 +4,10 @@ from twilio.rest import Client
 import time
 import os
 
-ACCOUNT_SID = ""
-AUTH_TOKEN = ""
-TWILIO_NUMBER = ""
+
+ACCOUNT_SID = "AC151c6b601ff1edf3a341ca479dcc8004"
+AUTH_TOKEN = "683e7d62be77ae8cbd40caf7cef65b11"
+TWILIO_NUMBER = "+18777804236"
 
 client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
