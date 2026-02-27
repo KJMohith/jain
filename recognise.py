@@ -9,10 +9,8 @@ import os
 EMBEDDING_FILE = "database/embeddings.pkl"
 ATTENDANCE_FILE = "database/attendance.csv"
 
-# Increase threshold for better accuracy
 THRESHOLD = 0.78
 
-# Prevent repeated marking in same session
 marked_today = set()
 
 
@@ -28,11 +26,9 @@ def mark_attendance(student_id, name, student_class, section):
     date_str = now.strftime("%Y-%m-%d")
     time_str = now.strftime("%H:%M:%S")
 
-    # Prevent multiple marking in same run
     if (student_id, date_str) in marked_today:
         return
 
-    # Prevent duplicate marking across runs
     if os.path.exists(ATTENDANCE_FILE):
         df = pd.read_csv(ATTENDANCE_FILE)
         if ((df["id"] == student_id) & (df["date"] == date_str)).any():
